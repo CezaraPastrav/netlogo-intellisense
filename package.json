@@ -1,0 +1,102 @@
+{
+	"name": "netlogo-intellisense",
+	"displayName": "NetLogo Intellisense",
+	"description": "Autocomplete, documentation, navigation and compile diagnostics for NetLogo (.nlogo, .nlogox, .nls) files",
+	"version": "0.2.0",
+	"publisher": "netlogo-community",
+	"engines": {
+		"vscode": "^1.80.0"
+	},
+	"categories": [
+		"Programming Languages",
+		"Linters"
+	],
+	"activationEvents": [
+		"workspaceContains:**/*.nlogox",
+		"workspaceContains:**/*.nlogo",
+		"workspaceContains:**/*.nls"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"languages": [
+			{
+				"id": "netlogo",
+				"aliases": [
+					"NetLogo",
+					"netlogo"
+				],
+				"extensions": [
+					".nlogo",
+					".nlogo3d",
+					".nls"
+				],
+				"configuration": "./language-configuration.json"
+			}
+		],
+		"grammars": [
+			{
+				"language": "netlogo",
+				"scopeName": "source.netlogo",
+				"path": "./syntaxes/netlogo.tmLanguage.json"
+			}
+		],
+		"snippets": [
+			{
+				"language": "netlogo",
+				"path": "./snippets/netlogo.json"
+			}
+		],
+		"commands": [
+			{
+				"command": "netlogo.compileModel",
+				"title": "NetLogo: Compile Model"
+			}
+		],
+		"configuration": {
+			"title": "NetLogo Intellisense",
+			"properties": {
+				"netlogo.diagnostics.enabled": {
+					"type": "boolean",
+					"default": true,
+					"description": "Run fast in-editor checks (bracket balance, duplicate procedures) as you type."
+				},
+				"netlogo.diagnostics.undefinedNames": {
+					"type": "boolean",
+					"default": true,
+					"description": "Warn about identifiers that are not defined anywhere the file can see. Turn this off if breed- or extension-generated names produce false warnings."
+				},
+				"netlogo.compile.enabled": {
+					"type": "boolean",
+					"default": true,
+					"description": "Use the real NetLogo compiler to check the model."
+				},
+				"netlogo.compile.onSave": {
+					"type": "boolean",
+					"default": true,
+					"description": "Run the NetLogo compiler when a NetLogo file is saved."
+				},
+				"netlogo.compile.netLogoDirectory": {
+					"type": "string",
+					"default": "",
+					"description": "Path to the NetLogo installation directory. Leave empty to detect it automatically."
+				},
+				"netlogo.compile.timeoutSeconds": {
+					"type": "number",
+					"default": 120,
+					"minimum": 10,
+					"description": "How long to wait for the NetLogo compiler before giving up."
+				}
+			}
+		}
+	},
+	"scripts": {
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"package": "vsce package"
+	},
+	"devDependencies": {
+		"@types/vscode": "^1.80.0",
+		"@types/node": "^18.0.0",
+		"typescript": "^5.3.0"
+	}
+}
