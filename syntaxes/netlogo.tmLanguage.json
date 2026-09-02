@@ -3,6 +3,7 @@
   "name": "NetLogo",
   "scopeName": "source.netlogo",
   "patterns": [
+    { "include": "#regions" },
     { "include": "#comments" },
     { "include": "#strings" },
     { "include": "#procedure-definition" },
@@ -16,6 +17,15 @@
     { "include": "#brackets" }
   ],
   "repository": {
+    "regions": {
+      "match": "^\\s*(;+)\\s*(#region|#endregion)\\b(.*)$",
+      "name": "comment.line.semicolon.netlogo",
+      "captures": {
+        "1": { "name": "punctuation.definition.comment.netlogo" },
+        "2": { "name": "keyword.control.region.netlogo" },
+        "3": { "name": "entity.name.section.netlogo" }
+      }
+    },
     "comments": {
       "name": "comment.line.semicolon.netlogo",
       "match": ";.*$"

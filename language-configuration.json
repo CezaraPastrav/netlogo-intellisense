@@ -16,5 +16,11 @@
     ["(", ")"],
     ["\"", "\""]
   ],
-  "wordPattern": "[a-zA-Z_#][a-zA-Z0-9_?!#-]*"
+  "wordPattern": "[a-zA-Z_#][a-zA-Z0-9_?!#-]*",
+  "folding": {
+    "markers": {
+      "start": "^\\s*;+\\s*#region\\b",
+      "end": "^\\s*;+\\s*#endregion\\b"
+    }
+  }
 }

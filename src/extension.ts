@@ -5,6 +5,7 @@ import { NetLogoHoverProvider } from "./providers/hoverProvider";
 import { NetLogoDefinitionProvider } from "./providers/definitionProvider";
 import { NetLogoReferenceProvider } from "./providers/referenceProvider";
 import { NetLogoDocumentSymbolProvider } from "./providers/documentSymbolProvider";
+import { NetLogoFoldingRangeProvider } from "./providers/foldingRangeProvider";
 import { NetLogoSignatureHelpProvider } from "./providers/signatureHelpProvider";
 import { DiagnosticsManager } from "./diagnostics";
 
@@ -52,6 +53,10 @@ export async function activate(
     vscode.languages.registerDocumentSymbolProvider(
       NETLOGO_SELECTOR,
       new NetLogoDocumentSymbolProvider(symbolStore)
+    ),
+    vscode.languages.registerFoldingRangeProvider(
+      NETLOGO_SELECTOR,
+      new NetLogoFoldingRangeProvider()
     ),
     vscode.languages.registerSignatureHelpProvider(
       NETLOGO_SELECTOR,

@@ -213,12 +213,29 @@ function buildProcedure(
   };
 }
 
-/** Find the line holding the `end` that closes a procedure starting at `startLine`. */
+/**
+ * Find the line holding the `end` that closes a procedure starting at `startLine`.
+ *
+ * A procedure written entirely on one line closes on its own line, and a
+ * missing `end` stops at the next procedure header instead of swallowing the
+ * rest of the file.
+ */
 export function findEndLine(lines: string[], startLine: number): number {
+  const header = stripComment(lines[startLine] ?? "");
+  const headerMatch = /^\s*to(?:-report)?\s+\S+/i.exec(header);
+  if (
+    headerMatch &&
+    /(?:^|\s)end(?:\s|$)/i.test(header.slice(headerMatch[0].length))
+  ) {
+    return startLine;
+  }
   for (let i = startLine + 1; i < lines.length; i++) {
     const trimmed = stripComment(lines[i]).trim();
     if (/^end\b/i.test(trimmed)) {
       return i;
+    }
+    if (/^to(?:-report)?\b/i.test(trimmed)) {
+      return i - 1;
     }
   }
   return lines.length - 1;

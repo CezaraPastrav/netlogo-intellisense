@@ -1,4 +1,4 @@
-# NetLogo IntelliSense - Plans
+﻿# NetLogo IntelliSense - Plans
 
 ## Current State (v0.2.0)
 
@@ -12,6 +12,9 @@ Working:
 - Signature help for user procedures and built-ins, counting NetLogo's
   parenthesis-free positional arguments
 - Go-to-definition, find-all-references, document outline
+- Folding: `;#region Name` / `;#endregion` markers, `to ... end`, multi-line
+  bracket blocks and runs of comment lines. In `.nlogo` and `.nlogox` only the
+  code section folds, not the widget or XML sections
 - `__includes` resolution, model-relative as NetLogo does it
 - `.nlogox` support: code extracted from the `<code>` CDATA block, symbol
   locations offset onto real file lines
@@ -20,7 +23,6 @@ Working:
 - Diagnostics: bracket balance, duplicate procedures, undefined names as you
   type; the real NetLogo compiler on save, with errors mapped back to the
   right file and line
-- Snippets
 - TextMate grammar
 
 ## Known Limitations
@@ -45,7 +47,6 @@ Working:
 ### Editor experience
 - Rename symbol across files
 - Workspace symbol search (Ctrl+T)
-- Code folding for `to ... end` and declaration blocks
 - Auto-indent and format-on-save
 - Colour global, breed-own and local variables differently
 
